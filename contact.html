@@ -138,30 +138,54 @@
                                 Contact me! I'd love to talk teaching and learning Computer Science.
                             </p>
                             <div class="contact-form">
-                                            <form id="contact-form" method="post" action="" role="form">
-                                    
-                                                <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".6s">
-                                                    <input type="text" placeholder="Your Name" class="form-control" name="name" id="name">
-                                                </div>
-                                                
-                                                <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".8s">
-                                                    <input type="email" placeholder="Your Email" class="form-control" name="email" id="email" >
-                                                </div>
-                                                
-                                                <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1s">
-                                                    <input type="text" placeholder="Subject" class="form-control" name="subject" id="subject">
-                                                </div>
-                                                
-                                                <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.2s">
-                                                    <textarea rows="6" placeholder="Message" class="form-control" name="message" id="message"></textarea>    
-                                                </div>
-                                                
-                                                
-                                                <div id="submit" class="wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.4s">
-                                                    <input type="submit" id="contact-submit" class="btn btn-default btn-send" value="Send Message">
-                                                </div>                      
-                                                
-                                            </form>
+<?php 
+$action=$_REQUEST['action']; 
+if ($action=="")    /* display the contact form */ 
+    { 
+    ?> 
+        <form id="contact-form" method="post" action="" role="form">
+
+        <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".6s">
+            <input type="text" placeholder="Your Name" class="form-control" name="name" id="name">
+        </div>
+        
+        <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".8s">
+            <input type="email" placeholder="Your Email" class="form-control" name="email" id="email" >
+        </div>
+        
+        <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1s">
+            <input type="text" placeholder="Subject" class="form-control" name="subject" id="subject">
+        </div>
+        
+        <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.2s">
+            <textarea rows="6" placeholder="Message" class="form-control" name="message" id="message"></textarea>    
+        </div>
+        
+        
+        <div id="submit" class="wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.4s">
+            <input type="submit" id="contact-submit" class="btn btn-default btn-send" value="Send Message">
+        </div>                      
+        
+    <?php 
+    }  
+else                /* send the submitted data */ 
+    { 
+    $name=$_REQUEST['name']; 
+    $email=$_REQUEST['email']; 
+    $message=$_REQUEST['message']; 
+    $subject=$_REQUEST['subject'];
+    if (($name=="")||($email=="")||($message=="")) 
+        { 
+        //echo "All fields are required, please fill"." <a href='#'> checking the form </a>"."again."; 
+        } 
+    else{         
+        //$from="From: $name<$email>\r\nReturn-path: $email"; 
+        $subject="Message sent using your contact form"; 
+        mail("youremail@yoursite.com", $subject, $message, $from); 
+        echo "Email sent!"; 
+        } 
+    }   
+?> 
                             </div>
                         </div>
                     </div>
