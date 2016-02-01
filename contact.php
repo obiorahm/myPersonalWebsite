@@ -163,7 +163,7 @@ if ($action=="")    /* display the contact form */
         
         
         <div id="submit" class="wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.4s">
-            <input type="submit" id="contact-submit" class="btn btn-default btn-send" value="Send Message">
+            <input type="submit" id="contact-submit" name="action" class="btn btn-default btn-send" value="Send Message">
         </div>                      
         
     <?php 
@@ -181,7 +181,7 @@ else                /* send the submitted data */
     else{         
         $from="From: $name<$email>\r\nReturn-path: $email"; 
         $subject="Message sent using your contact form"; 
-        mail("youremail@yoursite.com", $subject, $message, $from); 
+        mail("mmaobi01@yahoo.com", $subject, $message, $from); 
         echo "Email sent!"; 
         } 
     }   
