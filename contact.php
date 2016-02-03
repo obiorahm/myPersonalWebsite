@@ -174,42 +174,18 @@ else                /* send the submitted data */
 
     $name=$_REQUEST['name']; 
     $email=$_REQUEST['email']; 
-    $text_message=$_REQUEST['message']; 
+    $message=$_REQUEST['message']; 
     $subject=$_REQUEST['subject'];
-<<<<<<< HEAD
-    if (($name=="")||($email=="")||($text_message=="")) 
-=======
     if (($name=="")||($email=="")||($message=="")) 
->>>>>>> heroku
         { 
         echo "All fields are required, please fill <a href=\"\">the form</a> again."; 
         } 
     else{ 
 
-<<<<<<< HEAD
-            
-=======
-            require 'vendor/autoload.php'
->>>>>>> heroku
-            $sendgrid = new SendGrid('YOUR_SENDGRID_USERNAME', 'YOUR_SENDGRID_PASSWORD');
-            $message = new SendGrid\Email();
-            $message->addTo('obiorahm@gmail.com')->
-            setFrom($email)->
-            setSubject($subject)->
-            setText($text_message)->
-            setHtml('<strong>Hello World!</strong>');
-            $response = $sendgrid->send($message);           
 
-
-<<<<<<< HEAD
-        //$from="From: $name<$email>\r\nReturn-path: $email"; 
-        //$subject="Message sent using your contact form"; 
-        //mail("obiorahm@gmail.com", $subject, $text_message, $from); 
-=======
         $from="From: $name<$email>\r\nReturn-path: $email"; 
         $subject="Message sent using your contact form"; 
         mail("obiorahm@gmail.com", $subject, $message, $from); 
->>>>>>> heroku
         echo "Email sent!"; 
         } 
     }   
