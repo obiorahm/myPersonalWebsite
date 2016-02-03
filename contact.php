@@ -171,26 +171,28 @@ if ($action=="")    /* display the contact form */
 else                /* send the submitted data */ 
     { 
 
-$mail = new PHPMailer();
-$mail->IsSMTP();
-$mail->CharSet = 'UTF-8';
-
-$mail->Host       = "obiorahm@gmail.com"; // SMTP server example
-$mail->SMTPDebug  = 0;                     // enables SMTP debug information (for testing)
-$mail->SMTPAuth   = true;                  // enable SMTP authentication
-$mail->Port       = 25;                    // set the SMTP port for the GMAIL server
-$mail->Username   = "obiorahm@gmail.com"; // SMTP account username example
-$mail->Password   = "uj/2004/ns/0229";   
 
     $name=$_REQUEST['name']; 
     $email=$_REQUEST['email']; 
-    $message=$_REQUEST['message']; 
+    $text_message=$_REQUEST['message']; 
     $subject=$_REQUEST['subject'];
     if (($name=="")||($email=="")||($message=="")) 
         { 
         echo "All fields are required, please fill <a href=\"\">the form</a> again."; 
         } 
-    else{         
+    else{ 
+
+            require 'vendor/autoload.php'
+            $sendgrid = new SendGrid('YOUR_SENDGRID_USERNAME', 'YOUR_SENDGRID_PASSWORD');
+            $message = new SendGrid\Email();
+            $message->addTo('obiorahm@gmail.com')->
+            setFrom($email)->
+            setSubject($subject)->
+            setText($text_message)->
+            setHtml('<strong>Hello World!</strong>');
+            $response = $sendgrid->send($message);           
+
+
         $from="From: $name<$email>\r\nReturn-path: $email"; 
         $subject="Message sent using your contact form"; 
         mail("obiorahm@gmail.com", $subject, $message, $from); 
