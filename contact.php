@@ -86,7 +86,7 @@
                     <div class="main-menu">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="index.html" >Home</a>
+                                <a href="home.html" >Home</a>
                             </li>
                             <li><a href="service.html">Research</a></li>
                             
@@ -163,25 +163,39 @@ if ($action=="")    /* display the contact form */
         
         
         <div id="submit" class="wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.4s">
-            <input type="submit" name="action" id="contact-submit" class="btn btn-default btn-send" value="Send Message">
+            <input type="submit" id="contact-submit" name="action" class="btn btn-default btn-send" value="Send Message">
         </div>                      
         
     <?php 
     }  
 else                /* send the submitted data */ 
     { 
+
+
     $name=$_REQUEST['name']; 
     $email=$_REQUEST['email']; 
-    $message=$_REQUEST['message']; 
+    $text_message=$_REQUEST['message']; 
     $subject=$_REQUEST['subject'];
-    if (($name=="")||($email=="")||($message=="")) 
+    if (($name=="")||($email=="")||($text_message=="")) 
         { 
         echo "All fields are required, please fill <a href=\"\">the form</a> again."; 
         } 
-    else{         
-        $from="From: $name<$email>\r\nReturn-path: $email"; 
-        $subject="Message sent using your contact form"; 
-        mail("obiorahm@gmail.com", $subject, $message, $from); 
+    else{ 
+
+            
+            $sendgrid = new SendGrid('YOUR_SENDGRID_USERNAME', 'YOUR_SENDGRID_PASSWORD');
+            $message = new SendGrid\Email();
+            $message->addTo('obiorahm@gmail.com')->
+            setFrom($email)->
+            setSubject($subject)->
+            setText($text_message)->
+            setHtml('<strong>Hello World!</strong>');
+            $response = $sendgrid->send($message);           
+
+
+        //$from="From: $name<$email>\r\nReturn-path: $email"; 
+        //$subject="Message sent using your contact form"; 
+        //mail("obiorahm@gmail.com", $subject, $text_message, $from); 
         echo "Email sent!"; 
         } 
     }   
