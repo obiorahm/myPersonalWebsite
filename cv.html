@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+    <title>Hello world</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var pdf = new jsPDF();
+        pdf.text(30, 30, 'Curriculum Vitae');
+        doc.line(30, 35, 60, 20); // horizontal line
+		doc.setLineWidth(0.5);
+        pdf.save('cv.pdf');
+    </script>
+</body>
+</html>
