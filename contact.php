@@ -2,7 +2,8 @@
 $action=$_REQUEST['submit'];
 if ($action=="")    /* display the contact form */
     {
-
+        ?>
+<?php
     } 
 else                /* send the submitted data */
     {
