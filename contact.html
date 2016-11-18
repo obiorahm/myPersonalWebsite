@@ -139,9 +139,30 @@
                             <p class="subtitle-des wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".5s">
                                 Contact me! I'll be happy to talk about teaching and learning Computer Science.
                             </p>
+
+                            <?php
+
+                                if(isset($_POST['submit'])) /* send the submitted data */
+                                {
+                                    $name=$_POST['name'];
+                                    $email=$_POST['email'];
+                                    $message=$_POST['message'];
+                                    if (($name=="")||($email=="")||($message==""))
+                                        {
+                                        echo "All fields are required, please fill <a href=\"contact.html\">the form</a> again.";
+                                        }
+                                    else{       
+                                        $from="From: $name<$email>\r\nReturn-path: $email";
+                                        $subject="Message sent using your contact form";
+                                        mail("obiorahm@gmail.com", $subject, $message, $from);
+                                        echo "Email sent!";
+                                        } 
+                                }else{                               
+                            ?>
+
                             <div class="contact-form">
 
-                                <form id="contact-form" method="post" action="contact.php" role="form">
+                                <form id="contact-form" method="post" action="#" role="form">
 
                                 <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".6s">
                                     <input type="text" placeholder="Your Name" class="form-control" name="name" id="name">
@@ -164,7 +185,9 @@
                                     <input type="submit" name="submit" id="submit" class="btn btn-default btn-send" value="Send Message">
                                 </div>    
                                 </form>                  
-        
+                            <?php    
+                                }                
+                            ?>
                         
                             </div>
                         </div>
